@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import Buttons from "./components/Buttons";
+import Display from "./components/Display";
 
 function App() {
   const [time, setTime] = useState(0);
@@ -18,19 +19,9 @@ function App() {
     return () => clearInterval(intervalId);
   }, [timerOn]);
 
-  const formatTime = () => {
-    const getSeconds = `0${time % 60}`.slice(-2);
-    const minutes = `${Math.floor(time / 60)}`;
-    const getMinutes = `0${minutes % 60}`.slice(-2);
-    const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
-
-    return `${getHours} : ${getMinutes} : ${getSeconds}`;
-  };
   return (
     <div className="App">
-      <div>
-        <span>{formatTime()}</span>
-      </div>
+      <Display time={time} />
       <Buttons setTime={setTime} timerOn={timerOn} setTimerOn={setTimerOn} />
     </div>
   );

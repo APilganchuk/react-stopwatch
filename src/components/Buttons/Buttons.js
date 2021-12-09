@@ -5,15 +5,31 @@ export default function Buttons({ setTime, timerOn, setTimerOn }) {
     setTimerOn(timerStatus);
   };
 
+  const start = () => {
+    changeTimerStatus(true);
+  };
+
+  const stop = () => {
+    changeTimerStatus(false);
+    setTime(0);
+  };
+
+  const wait = (e) => {
+    const isDoubleClick = (e) => e.detail === 2;
+    if (isDoubleClick(e)) {
+      changeTimerStatus(false);
+    }
+  };
+
   return (
     <div>
       {!timerOn ? (
-        <button onClick={() => changeTimerStatus(true)}>Start</button>
+        <button onClick={start}>Start</button>
       ) : (
-        <button onClick={() => changeTimerStatus(false)}>Stop</button>
+        <button onClick={stop}>Stop</button>
       )}
 
-      <button onClick={() => changeTimerStatus(true)}>Wait</button>
+      <button onClick={wait}>Wait</button>
       <button onClick={() => setTime(0)}>Reset</button>
     </div>
   );

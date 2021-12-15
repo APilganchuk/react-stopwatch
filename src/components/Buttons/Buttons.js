@@ -21,6 +21,9 @@ export default function Buttons({ setTime, timerOn, setTimerOn }) {
     }
   };
 
+  const reset = () => {
+    setTime(0);
+  };
   return (
     <div>
       {!timerOn ? (
@@ -30,7 +33,7 @@ export default function Buttons({ setTime, timerOn, setTimerOn }) {
       )}
 
       <button onClick={wait}>Wait</button>
-      <button onClick={() => setTime(0)}>Reset</button>
+      <button onClick={reset}>Reset</button>
     </div>
   );
 }

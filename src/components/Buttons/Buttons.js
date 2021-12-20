@@ -1,4 +1,5 @@
 import React from "react";
+import { debounceTime } from "rxjs";
 
 export default function Buttons({ setTime, timerOn, setTimerOn }) {
   const changeTimerStatus = (timerStatus) => {
@@ -14,16 +15,14 @@ export default function Buttons({ setTime, timerOn, setTimerOn }) {
     setTime(0);
   };
 
-  const wait = (e) => {
-    const isDoubleClick = (e) => e.detail === 2;
-    if (isDoubleClick(e)) {
-      changeTimerStatus(false);
-    }
+  const wait = () => {
+    debounceTime(changeTimerStatus(false), 300);
   };
 
   const reset = () => {
     setTime(0);
   };
+
   return (
     <div>
       {!timerOn ? (
@@ -32,7 +31,7 @@ export default function Buttons({ setTime, timerOn, setTimerOn }) {
         <button onClick={stop}>Stop</button>
       )}
 
-      <button onClick={wait}>Wait</button>
+      <button onDoubleClick={wait}>Wait</button>
       <button onClick={reset}>Reset</button>
     </div>
   );
